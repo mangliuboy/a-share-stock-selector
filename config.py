@@ -98,9 +98,9 @@ TECHNICAL_PARAMS = {
 # 数据获取参数
 # ============================================================
 DATA_CONFIG = {
-    "request_delay": 0.5,           # SkillHub API 请求间隔
+    "request_delay": 0.2,           # SkillHub API 请求间隔（优化后降低延迟）
     "history_years": 3,
-    "max_stocks_per_sector": 30,
+    "max_stocks_per_sector": 10,    # 每板块最多分析股票数
     "page_limit": 20,               # 每次请求返回条数
 }
 

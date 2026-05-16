@@ -150,7 +150,12 @@ def query_all_pages(skill_type: str, query_str: str,
 # ---- 便捷函数 ----
 
 def query_finance(query_str: str, **kwargs) -> list:
+    """finance 接口（当前 API Key 无权限，请使用 query_business 替代）"""
     return query_all_pages("finance", query_str, **kwargs)
+
+def query_business(query_str: str, **kwargs) -> list:
+    """经营数据接口（替代 finance，提供 ROE/毛利率/PE/PB/营收增长等）"""
+    return query_all_pages("business", query_str, **kwargs)
 
 def query_market(query_str: str, **kwargs) -> list:
     return query_all_pages("market", query_str, **kwargs)
