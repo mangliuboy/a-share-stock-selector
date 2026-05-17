@@ -13,7 +13,7 @@ from skillhub_client import (
     query_industry, query_events, query,
 )
 from config import (
-    SECTOR_MAPPING, DATA_CONFIG, FUNDAMENTAL_FILTER,
+    SECTOR_MAPPING, DATA_CONFIG, FUNDAMENTAL_FILTER, SECTOR_ROE_THRESHOLDS,
 )
 
 
@@ -420,8 +420,9 @@ def quick_filter(sector_key: str) -> list[dict]:
         rev_growth = fin.get("revenue_growth") or 0
         debt = fin.get("debt_ratio") or 100
 
-        if roe < FUNDAMENTAL_FILTER["min_roe"]:
-            print(f"    -> ROE={roe}% 不满足最低要求，跳过")
+        min_roe = SECTOR_ROE_THRESHOLDS.get(sector_key, FUNDAMENTAL_FILTER["min_roe"])
+        if roe < min_roe:
+            print(f"    -> ROE={roe}% < 行业标准{min_roe}%，跳过")
             continue
         if rev_growth < FUNDAMENTAL_FILTER["min_revenue_growth"]:
             print(f"    -> 营收增长={rev_growth}% 不满足要求，跳过")
